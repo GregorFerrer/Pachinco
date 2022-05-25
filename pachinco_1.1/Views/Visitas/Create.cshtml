@@ -1,0 +1,58 @@
+﻿@model ClassLibrary1.Visita
+
+@{
+    ViewBag.Title = "Registra aqui tu usuario";
+}
+
+<h2>Registre y consulte su reserva aqui</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Visita</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.fecha_visita,"fecha de visita" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date"@Html.EditorFor(model => model.fecha_visita, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fecha_visita, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hora_visita,"hora de visita" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="time" @Html.EditorFor(model => model.hora_visita, new { htmlAttributes = new { @class = "form-control" } })
+                       @Html.ValidationMessageFor(model => model.hora_visita, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_guia, "seleccione su guia", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("id_guia", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_guia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numero_identificacion, "numero de identificacion",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numero_identificacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.numero_identificacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Registrar visita" class="btn btn-default" />
+                <a class="btn btn-info" href="https://localhost:44308/Visitas"> Consultar reserva </a>
+            </div>
+
+        </div>
+    </div>
+}

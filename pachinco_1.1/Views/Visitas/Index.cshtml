@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ClassLibrary1.Visita>
+
+@{
+    ViewBag.Title ="Lista de visitas";
+}
+
+<h2>Lista de Visitas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_visita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hora_visita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Guia.nombre_guia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Visitante.nombres)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_visita)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hora_visita)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Guia.nombre_guia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Visitante.nombres)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_visita }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_visita }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_visita })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,44 @@
+create table Visitante(
+numero_identificacion numeric(10) not null,
+nombres varchar(30) not null,
+apellidos varchar(30) not null,
+conteo_visitante numeric identity(1000,2) not null,
+edad numeric(3) not null,
+sexo varchar(1) not null
+primary key (numero_identificacion))
+
+insert into Visitante values(1234567890,'federico','gutierrez',48,'M')
+insert into Visitante values(0987654321,'alvaro','montalves',18,'M')
+insert into Visitante values(9087564312,'marina','mesa',22,'F')
+
+create table Guia (
+id_guia numeric (5) not null,
+nombre_guia varchar(40)not null,
+sexo varchar(1)not null,
+edad numeric (3)not null
+primary key (id_guia))
+
+insert into Guia values(13632,'maricarmen contenta','F',120)
+insert into Guia values(58693,'brandol triste','M',19)
+insert into Guia values(56903,'carlos savila','M',19)
+insert into Guia values(38746,'Fermin arrazola','M',58)
+
+create table Visita(
+id_visita numeric identity (1000,3) not null,
+fecha_visita varchar (50)not null,
+hora_visita varchar (10)not null,
+id_guia numeric (5)not null,
+numero_identificacion numeric(10) not null
+primary key (id_visita),
+foreign key (id_guia) references Guia,
+foreign key (numero_identificacion) references Visitante)
+
+
+insert into Visita values('7/11/2023','22:00',13632,1234567890)
+insert into Visita values('3/6/2023','10:00',58693,0987654321)
+insert into Visita values('5/7/2023','14:00',56903,9087564312)
+
+
+
+
+

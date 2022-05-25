@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Guia">
+          <Key>
+            <PropertyRef Name="id_guia" />
+          </Key>
+          <Property Name="id_guia" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="nombre_guia" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="sexo" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="edad" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="id_visita" />
+          </Key>
+          <Property Name="id_visita" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_visita" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="hora_visita" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_guia" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="numero_identificacion" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visitante">
+          <Key>
+            <PropertyRef Name="numero_identificacion" />
+          </Key>
+          <Property Name="numero_identificacion" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="conteo_visitante" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edad" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="sexo" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Visita__id_guia__2E1BDC42">
+          <End Role="Guia" Type="Self.Guia" Multiplicity="1" />
+          <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guia">
+              <PropertyRef Name="id_guia" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="id_guia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visita__numero_i__2F10007B">
+          <End Role="Visitante" Type="Self.Visitante" Multiplicity="1" />
+          <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visitante">
+              <PropertyRef Name="numero_identificacion" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="numero_identificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Guia" EntityType="Self.Guia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visita" EntityType="Self.Visita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visitante" EntityType="Self.Visitante" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Visita__id_guia__2E1BDC42" Association="Self.FK__Visita__id_guia__2E1BDC42">
+            <End Role="Guia" EntitySet="Guia" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visita__numero_i__2F10007B" Association="Self.FK__Visita__numero_i__2F10007B">
+            <End Role="Visitante" EntitySet="Visitante" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Guia">
+          <Key>
+            <PropertyRef Name="id_guia" />
+          </Key>
+          <Property Name="id_guia" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="nombre_guia" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="edad" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Visita" Relationship="Self.FK__Visita__id_guia__2E1BDC42" FromRole="Guia" ToRole="Visita" />
+        </EntityType>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="id_visita" />
+          </Key>
+          <Property Name="id_visita" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_visita" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hora_visita" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_guia" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="numero_identificacion" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Guia" Relationship="Self.FK__Visita__id_guia__2E1BDC42" FromRole="Visita" ToRole="Guia" />
+          <NavigationProperty Name="Visitante" Relationship="Self.FK__Visita__numero_i__2F10007B" FromRole="Visita" ToRole="Visitante" />
+        </EntityType>
+        <EntityType Name="Visitante">
+          <Key>
+            <PropertyRef Name="numero_identificacion" />
+          </Key>
+          <Property Name="numero_identificacion" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="conteo_visitante" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edad" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Visita" Relationship="Self.FK__Visita__numero_i__2F10007B" FromRole="Visitante" ToRole="Visita" />
+        </EntityType>
+        <Association Name="FK__Visita__id_guia__2E1BDC42">
+          <End Role="Guia" Type="Self.Guia" Multiplicity="1" />
+          <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guia">
+              <PropertyRef Name="id_guia" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="id_guia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visita__numero_i__2F10007B">
+          <End Role="Visitante" Type="Self.Visitante" Multiplicity="1" />
+          <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visitante">
+              <PropertyRef Name="numero_identificacion" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="numero_identificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Guia" EntityType="Self.Guia" />
+          <EntitySet Name="Visita" EntityType="Self.Visita" />
+          <EntitySet Name="Visitante" EntityType="Self.Visitante" />
+          <AssociationSet Name="FK__Visita__id_guia__2E1BDC42" Association="Self.FK__Visita__id_guia__2E1BDC42">
+            <End Role="Guia" EntitySet="Guia" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visita__numero_i__2F10007B" Association="Self.FK__Visita__numero_i__2F10007B">
+            <End Role="Visitante" EntitySet="Visitante" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Guia">
+            <EntityTypeMapping TypeName="Model.Guia">
+              <MappingFragment StoreEntitySet="Guia">
+                <ScalarProperty Name="id_guia" ColumnName="id_guia" />
+                <ScalarProperty Name="nombre_guia" ColumnName="nombre_guia" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visita">
+            <EntityTypeMapping TypeName="Model.Visita">
+              <MappingFragment StoreEntitySet="Visita">
+                <ScalarProperty Name="id_visita" ColumnName="id_visita" />
+                <ScalarProperty Name="fecha_visita" ColumnName="fecha_visita" />
+                <ScalarProperty Name="hora_visita" ColumnName="hora_visita" />
+                <ScalarProperty Name="id_guia" ColumnName="id_guia" />
+                <ScalarProperty Name="numero_identificacion" ColumnName="numero_identificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visitante">
+            <EntityTypeMapping TypeName="Model.Visitante">
+              <MappingFragment StoreEntitySet="Visitante">
+                <ScalarProperty Name="numero_identificacion" ColumnName="numero_identificacion" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="conteo_visitante" ColumnName="conteo_visitante" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,50 @@
+﻿@model ClassLibrary1.Visita
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Visita</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_visita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_visita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hora_visita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hora_visita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guia.nombre_guia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guia.nombre_guia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Visitante.nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visitante.nombres)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_visita }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
